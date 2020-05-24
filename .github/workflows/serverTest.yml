@@ -42,4 +42,4 @@ jobs:
         script: |
           whoami
           ls -l
-          echo "Hello World" > test.txtttt
+          echo "Hello World" > test.txt
