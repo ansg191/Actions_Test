@@ -22,10 +22,10 @@ jobs:
       run: |
         python -m pip install --upgrade pip
         if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
-        echo 'Test: ' > output.txt
-    - name: Run Hello World
+        mkdir -p assets/nn
+    - name: Run populatenn.py
       run: |
-        python Hello_World.py
+        python populatenn.py
 
     - name: Commit Files
       run: |
