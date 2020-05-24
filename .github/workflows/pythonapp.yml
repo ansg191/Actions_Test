@@ -24,6 +24,17 @@ jobs:
       run: |
         python -m pip install --upgrade pip
         if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
-    - name: Test with pytest
+        echo 'Test: ' > output.txt
+    - name: Run Hello World
       run: |
         python Hello_World.py
+      name: Commit Files
+      run: |
+        git config --local user.email "action@github.com"
+        git config --local user.name "Github Action"
+        git add output.txt
+        git commit -m "Output"
+      name: Push to Repo
+      uses: ad-m/github-push-action@master
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
