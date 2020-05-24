@@ -39,7 +39,7 @@ jobs:
       run: |
         git config --local user.email "action@github.com"
         git config --local user.name "Github Action"
-        git add output.txt
+        git add assets/nn
         git commit -m "Output"
 
     - name: Push to Repo
