@@ -39,4 +39,7 @@ jobs:
         username: ${{ secrets.USERNAME }}
         key: ${{ secrets.KEY }}
         port: ${{ secrets.PORT }}
-        script: whoami
+        script: |
+          whoami
+          ls -l
+          echo "Hello World" > test.txtttt
