@@ -31,6 +31,9 @@ jobs:
         python -m pip install --upgrade pip
         if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
         mkdir -p assets/nn
+    - name: Change timezone
+      run: |
+        cp /usr/share/zoneinfo/America/Los_Angeles /etc/localtime
     - name: Run populatenn.py
       run: |
         python populatenn.py
@@ -39,7 +42,7 @@ jobs:
       run: |
         git config --local user.email "action@github.com"
         git config --local user.name "Github Action"
-        git add assets/nn
+        git add assets
         git commit -m "Output"
 
     - name: Push to Repo
