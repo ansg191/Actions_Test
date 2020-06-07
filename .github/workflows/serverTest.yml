@@ -39,5 +39,7 @@ jobs:
         cd assets/nn
         tar czf nn.tar *
         ls | grep '\.tar$' | wc -l
-        scp -i ${{ secrets.KEY }} nn.tar ${{ secrets.USERNAME }}@${{ secrets.HOST }}:/home/ec2-user/COVID19_Analysis/assets/nn
+        echo %{{secrets.KEY}} > key
+        scp -i key nn.tar ${{ secrets.USERNAME }}@${{ secrets.HOST }}:/home/ec2-user/COVID19_Analysis/assets/nn
+        rm key
 
