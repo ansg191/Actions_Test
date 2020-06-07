@@ -33,3 +33,8 @@ jobs:
           whoami
           ls -l
           echo "Hello World" > test.txt
+
+    - name: Test scp
+      run: |
+        ls -l
+        scp
