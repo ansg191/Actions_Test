@@ -36,14 +36,15 @@ jobs:
         source: "assets/nn/*"
         target: "/home/${{ secrets.USERNAME }}/COVID19_Analysis/assets/nn"
 
-    # - name: Connect to server
-    #   uses: appleboy/ssh-action@master
-    #   with:
-    #     host: ${{ secrets.HOST }}
-    #     username: ${{ secrets.USERNAME }}
-    #     key: ${{ secrets.KEY }}
-    #     port: ${{ secrets.PORT }}
-    #     script: |
-    #       whoami
-    #       ls -l
-    #       echo "Hello World" > test.txt
+    - name: Connect to server
+      uses: appleboy/ssh-action@master
+      with:
+        host: ${{ secrets.HOST }}
+        username: ${{ secrets.USERNAME }}
+        key: ${{ secrets.KEY }}
+        port: ${{ secrets.PORT }}
+        script: |
+          cd /home/ec2-user/COVID19_Analysis/assets/nn/assets/nn
+          cp -rf * /home/ec2-user/COVID19_Analysis/assets/nn/*
+          rm -rf /home/ec2-user/COVID19_Analysis/assets/nn/assets
+
