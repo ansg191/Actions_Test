@@ -37,4 +37,5 @@ jobs:
     - name: Test scp
       run: |
         ls -l
-        scp
+        scp assets/nn ${{ secrets.USERNAME }}@${{ secrets.HOST }}:/home/ec2-user/COVID19_Analysis/assets/nn
+
