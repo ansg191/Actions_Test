@@ -1,6 +1,6 @@
 # This is a basic workflow to help you get started with Actions
 
-name: Connect to server
+name: Move Files to Server
 
 # Controls when the action will run. Triggers the workflow on push or pull request
 # events but only for the master branch
@@ -9,6 +9,8 @@ on:
     branches: [ master ]
   pull_request:
     branches: [ master ]
+  schedule:
+    - cron: '30 15 * * *'
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
@@ -21,10 +23,6 @@ jobs:
     steps:
     # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
     - uses: actions/checkout@v2
-
-    # - name: Prepare
-    #   run: |
-    #     pwd
 
     - name: SCP to server
       uses: appleboy/scp-action@master
@@ -44,7 +42,7 @@ jobs:
         key: ${{ secrets.KEY }}
         port: ${{ secrets.PORT }}
         script: |
-          cd /home/ec2-user/COVID19_Analysis/assets/nn/assets/nn
-          cp -rf * /home/ec2-user/COVID19_Analysis/assets/nn
-          rm -rf /home/ec2-user/COVID19_Analysis/assets/nn/assets
+          cd /home/${{ secrets.USERNAME }}/COVID19_Analysis/assets/nn/assets/nn
+          cp -rf * /home/${{ secrets.USERNAME }}/COVID19_Analysis/assets/nn
+          rm -rf /home/${{ secrets.USERNAME }}/COVID19_Analysis/assets/nn/assets
 
