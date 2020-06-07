@@ -34,12 +34,12 @@ jobs:
           ls -l
           echo "Hello World" > test.txt
 
-    - name: Test scp
-      run: |
-        cd assets/nn
-        tar czf nn.tar *
-        ls | grep '\.tar$' | wc -l
-        echo %{{secrets.KEY}} > key
-        scp -i key nn.tar ${{ secrets.USERNAME }}@${{ secrets.HOST }}:/home/ec2-user/COVID19_Analysis/assets/nn
-        rm key
-
+    - name: scp
+      uses: appleboy/scp-action@master
+      with: 
+        host: ${{ secrets.HOST }}
+        username: ${{ secrets.USERNAME }}
+        key: ${{ secrets.KEY }}
+        port: ${{ secrets.PORT }}
+        source: "nn.tar"
+        target: "/home/${{ secrets.USERNAME }}/COVID19_Analysis/assets/nn"
