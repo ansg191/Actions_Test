@@ -36,6 +36,8 @@ jobs:
 
     - name: Test scp
       run: |
-        ls -l
-        scp -i ${{ secrets.KEY }} assets/nn ${{ secrets.USERNAME }}@${{ secrets.HOST }}:/home/ec2-user/COVID19_Analysis/assets/nn
+        cd assets/nn
+        tar czf nn.tar *
+        ls | grep '\.tar$' | wc -l
+        scp -i ${{ secrets.KEY }} nn.tar ${{ secrets.USERNAME }}@${{ secrets.HOST }}:/home/ec2-user/COVID19_Analysis/assets/nn
 
