@@ -21,7 +21,23 @@ jobs:
     steps:
     # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
     - uses: actions/checkout@v2
-        
+
+    - name: Prepare
+      run: |
+        cd assets/nn
+        ls -l
+        tar cvf nn.tar *
+
+    - name: SCP to server
+      uses: appleboy/scp-action@master
+      with: 
+        host: ${{ secrets.HOST }}
+        username: ${{ secrets.USERNAME }}
+        key: ${{ secrets.KEY }}
+        port: ${{ secrets.PORT }}
+        source: "nn.tar"
+        target: "/home/${{ secrets.USERNAME }}/COVID19_Analysis/assets/nn"
+
     - name: Connect to server
       uses: appleboy/ssh-action@master
       with:
@@ -33,13 +49,3 @@ jobs:
           whoami
           ls -l
           echo "Hello World" > test.txt
-
-    - name: scp
-      uses: appleboy/scp-action@master
-      with: 
-        host: ${{ secrets.HOST }}
-        username: ${{ secrets.USERNAME }}
-        key: ${{ secrets.KEY }}
-        port: ${{ secrets.PORT }}
-        source: "nn.tar"
-        target: "/home/${{ secrets.USERNAME }}/COVID19_Analysis/assets/nn"
