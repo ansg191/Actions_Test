@@ -45,6 +45,6 @@ jobs:
         port: ${{ secrets.PORT }}
         script: |
           cd /home/ec2-user/COVID19_Analysis/assets/nn/assets/nn
-          cp -rf * /home/ec2-user/COVID19_Analysis/assets/nn/*
+          cp -rf * /home/ec2-user/COVID19_Analysis/assets/nn
           rm -rf /home/ec2-user/COVID19_Analysis/assets/nn/assets
 
