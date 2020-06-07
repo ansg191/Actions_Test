@@ -26,7 +26,7 @@ jobs:
       run: |
         cd assets/nn
         tar cvf nn.tar *
-        ls
+        ls /
 
     - name: SCP to server
       uses: appleboy/scp-action@master
@@ -35,7 +35,7 @@ jobs:
         username: ${{ secrets.USERNAME }}
         key: ${{ secrets.KEY }}
         port: ${{ secrets.PORT }}
-        source: "*"
+        source: "tar"
         target: "/home/${{ secrets.USERNAME }}/COVID19_Analysis/assets/nn"
 
     - name: Connect to server
