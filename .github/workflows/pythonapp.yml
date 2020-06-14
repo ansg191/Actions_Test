@@ -54,3 +54,25 @@ jobs:
       uses: ad-m/github-push-action@master
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
+
+    - name: SCP to server
+      uses: appleboy/scp-action@master
+      with: 
+        host: ${{ secrets.HOST }}
+        username: ${{ secrets.USERNAME }}
+        key: ${{ secrets.KEY }}
+        port: ${{ secrets.PORT }}
+        source: "assets/nn/*"
+        target: "/home/${{ secrets.USERNAME }}/COVID19_Analysis/assets/nn"
+
+    - name: Connect to server
+      uses: appleboy/ssh-action@master
+      with:
+        host: ${{ secrets.HOST }}
+        username: ${{ secrets.USERNAME }}
+        key: ${{ secrets.KEY }}
+        port: ${{ secrets.PORT }}
+        script: |
+          cd /home/${{ secrets.USERNAME }}/COVID19_Analysis/assets/nn/assets/nn
+          cp -rf * /home/${{ secrets.USERNAME }}/COVID19_Analysis/assets/nn
+          rm -rf /home/${{ secrets.USERNAME }}/COVID19_Analysis/assets/nn/assets
