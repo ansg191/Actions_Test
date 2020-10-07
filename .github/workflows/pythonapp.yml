@@ -63,7 +63,7 @@ jobs:
         key: ${{ secrets.KEY }}
         port: ${{ secrets.PORT }}
         source: "assets/nn/*"
-        target: "/home/${{ secrets.USERNAME }}/COVID19_Analysis/assets/nn"
+        target: "/home/${{ secrets.USERNAME }}/COVID/assets/nn"
 
     - name: Connect to server
       uses: appleboy/ssh-action@master
@@ -73,6 +73,6 @@ jobs:
         key: ${{ secrets.KEY }}
         port: ${{ secrets.PORT }}
         script: |
-          cd /home/${{ secrets.USERNAME }}/COVID19_Analysis/assets/nn/assets/nn
-          cp -rf * /home/${{ secrets.USERNAME }}/COVID19_Analysis/assets/nn
-          rm -rf /home/${{ secrets.USERNAME }}/COVID19_Analysis/assets/nn/assets
+          cd /home/${{ secrets.USERNAME }}/COVID/assets/nn/assets/nn
+          cp -rf * /home/${{ secrets.USERNAME }}/COVID/assets/nn
+          rm -rf /home/${{ secrets.USERNAME }}/COVID/assets/nn/assets
